@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Codeforces {
+
+    public int solution(int n, String s){
+        int res = 0;
+        for(int i = 0; i < n; i++) {
+            if('.' == s.charAt(i)) {
+                int right = 0;
+                int left = 0;
+                for(int j = i - 1; j >= 0; j--){
+                    if ('R' == s.charAt(j)) {
+                        right = i - j;
+                        break;
+                    } else if ('L' == s.charAt(j)){
+                        break;
+                    }
+                }
+                for(int j = i + 1; j < n; j++){
+                    if ('L' == s.charAt(j)) {
+                        left = j - i;
+                        break;
+                    } else if ('R' == s.charAt(j)){
+                        break;
+                    }
+                }
+                if(left == right){
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        try(Scanner scanner = new Scanner(System.in)){
+            // input
+            int n = scanner.nextInt();
+            scanner.nextLine();
+            String s = scanner.nextLine();
+            // solve
+            int res =  new Solution().solution(n, s);
+            // output
+            System.out.println(res);
+        }
+    }
+}

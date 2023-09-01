@@ -1,0 +1,36 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        try(Scanner scanner = new Scanner(System.in)){
+            // input
+            int n = scanner.nextInt();
+            scanner.nextLine();
+            int[][] matrix = new int[n][n];
+            for(int i = 0; i < n; i++){
+                matrix[i] = Arrays.stream(scanner.nextLine().trim().split("\\s+"))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
+            }
+            int q = scanner.nextInt();
+            scanner.nextLine();
+            StringBuilder sb = new StringBuilder();
+            int ans = 0;
+            for(int i = 0; i < n; i++){
+                ans ^= matrix[i][i];
+            }
+            for(int i = 0; i < q; i++){
+                int[] query = Arrays.stream(scanner.nextLine().trim().split("\\s+"))
+                        .mapToInt(Integer::parseInt)
+                        .toArray();
+                if(query.length == 1) {
+                    sb.append(ans);
+                    continue;
+                }
+                ans ^= 1;
+            }
+            System.out.println(sb);
+        }
+    }
+}
